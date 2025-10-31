@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { ArrowLeft, CheckCircle, XCircle } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ArrowLeft, CheckCircle, XCircle, Search } from 'lucide-react';
 import { QRScanner } from '@/components/QRScanner';
 import { supabase } from '@/lib/supabase';
 import { toast } from 'sonner';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const Catraca = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const Catraca = () => {
     nome?: string;
     rgm?: string;
   } | null>(null);
+  const [rgmManual, setRgmManual] = useState('');
 
   const handleScan = async (rgm: string) => {
     try {
@@ -54,6 +57,15 @@ const Catraca = () => {
     }
   };
 
+  const handleBuscaManual = () => {
+    if (!rgmManual.trim()) {
+      toast.error('Digite um RGM válido');
+      return;
+    }
+    handleScan(rgmManual.trim());
+    setRgmManual('');
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background p-4 flex items-center justify-center">
       <div className="w-full max-w-md space-y-6">
@@ -70,14 +82,53 @@ const Catraca = () => {
             Catraca Digital
           </h1>
           <p className="text-muted-foreground">
-            Escaneie o QR Code do aluno
+            Valide a entrada do aluno
           </p>
         </div>
 
         {!resultado && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <QRScanner onScan={handleScan} />
-          </div>
+          <Tabs defaultValue="qr" className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="qr">Escanear QR Code</TabsTrigger>
+              <TabsTrigger value="manual">Busca Manual</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="qr" className="mt-4">
+              <QRScanner onScan={handleScan} />
+            </TabsContent>
+            
+            <TabsContent value="manual" className="mt-4">
+              <Card className="p-6">
+                <div className="space-y-4">
+                  <div className="text-center space-y-2">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      Busca por RGM
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Digite o RGM do aluno para verificar a entrada
+                    </p>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      placeholder="Digite o RGM..."
+                      value={rgmManual}
+                      onChange={(e) => setRgmManual(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && handleBuscaManual()}
+                      className="text-lg"
+                    />
+                    <Button 
+                      onClick={handleBuscaManual}
+                      size="lg"
+                    >
+                      <Search className="h-5 w-5" />
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            </TabsContent>
+          </Tabs>
         )}
 
         {resultado && (

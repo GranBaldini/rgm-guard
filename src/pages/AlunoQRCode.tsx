@@ -1,7 +1,8 @@
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Home } from 'lucide-react';
+import { ArrowLeft, Home, AlertTriangle } from 'lucide-react';
 import { QRCodeDisplay } from '@/components/QRCodeDisplay';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const AlunoQRCode = () => {
   const navigate = useNavigate();
@@ -36,6 +37,22 @@ const AlunoQRCode = () => {
             Início
           </Button>
         </div>
+
+        <Alert className="border-amber-500 bg-amber-50 dark:bg-amber-950/20 animate-in fade-in slide-in-from-bottom-2 duration-500">
+          <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-500" />
+          <AlertTitle className="text-amber-900 dark:text-amber-100 font-bold">
+            ⚠️ Importante: Salve seu QR Code agora!
+          </AlertTitle>
+          <AlertDescription className="text-amber-800 dark:text-amber-200 space-y-2">
+            <p>
+              Este QR Code é único e não poderá ser recuperado depois. 
+              <strong> Baixe ou tire um print agora mesmo!</strong>
+            </p>
+            <p className="text-sm">
+              💡 Sem o QR Code, você precisará informar seu RGM manualmente ao porteiro.
+            </p>
+          </AlertDescription>
+        </Alert>
 
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
           <QRCodeDisplay rgm={rgm} nome={nome} email={email} />
