@@ -12,7 +12,7 @@ const Index = () => {
             <GraduationCap className="h-10 w-10 text-primary-foreground" />
           </div>
           <h1 className="text-4xl font-bold text-foreground">
-            UniScan
+            Sistema de Acesso
           </h1>
           <p className="text-lg text-muted-foreground">
             Escolha como deseja continuar
@@ -46,7 +46,7 @@ const Index = () => {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-foreground mb-1">
-                    Catraca
+                    Sou Catraca
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     Escaneie QR Codes para validar entrada
@@ -55,28 +55,10 @@ const Index = () => {
               </div>
             </Card>
           </Link>
-
-          <Link to="/professor">
-            <Card className="p-6 hover:shadow-[var(--shadow-lg)] transition-all duration-300 border-2 hover:border-accent cursor-pointer group">
-              <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <GraduationCap className="h-7 w-7 text-accent-foreground" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-foreground mb-1">
-                    Professor
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    Registre presença dos alunos nas aulas
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </Link>
         </div>
 
         <div className="text-center text-sm text-muted-foreground animate-in fade-in duration-1000 delay-300">
-          <p>UniScan - Sistema de controle de acesso v1.0</p>
+          <p>Sistema de controle de acesso v1.0</p>
         </div>
       </div>
     </div>

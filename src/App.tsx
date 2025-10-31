@@ -8,7 +8,6 @@ import NotFound from "./pages/NotFound";
 import AlunoCadastro from "./pages/AlunoCadastro";
 import AlunoQRCode from "./pages/AlunoQRCode";
 import Catraca from "./pages/Catraca";
-import Professor from "./pages/Professor";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +22,6 @@ const App = () => (
           <Route path="/aluno/cadastro" element={<AlunoCadastro />} />
           <Route path="/aluno/qrcode" element={<AlunoQRCode />} />
           <Route path="/catraca" element={<Catraca />} />
-          <Route path="/professor" element={<Professor />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
